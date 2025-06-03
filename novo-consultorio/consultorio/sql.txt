@@ -1,0 +1,118 @@
+-- 🔧 Ativar suporte a chaves estrangeiras
+PRAGMA foreign_keys = ON;
+
+-- 🔨 CRIAÇÃO DAS TABELAS
+
+CREATE TABLE medicos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    especialidade TEXT,
+    crm TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE pacientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    data_nascimento DATE,
+    telefone TEXT
+);
+
+CREATE TABLE funcionarios (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    cargo TEXT,
+    data_contratacao DATE
+);
+
+CREATE TABLE consultas (
+    id INTEGER PRIMARY KEY,
+    paciente_id INTEGER,
+    medico_id INTEGER,
+    data_consulta DATETIME NOT NULL,
+    motivo TEXT,
+    FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
+    FOREIGN KEY (medico_id) REFERENCES medicos(id)
+);
+
+-- =========================================
+-- 📌 CRUD: MÉDICOS
+-- =========================================
+
+-- CREATE
+INSERT INTO medicos (nome, especialidade, crm)
+VALUES ('Dr. João Silva', 'Cardiologia', '123456-SP');
+
+-- READ
+SELECT * FROM medicos;
+
+-- UPDATE
+UPDATE medicos
+SET especialidade = 'Clínico Geral'
+WHERE id = 1;
+
+-- DELETE
+DELETE FROM medicos
+WHERE id = 1;
+
+-- =========================================
+-- 📌 CRUD: PACIENTES
+-- =========================================
+
+-- CREATE
+INSERT INTO pacientes (nome, data_nascimento, telefone)
+VALUES ('Maria Oliveira', '1990-05-20', '(11) 91234-5678');
+
+-- READ
+SELECT * FROM pacientes;
+
+-- UPDATE
+UPDATE pacientes
+SET telefone = '(11) 99876-5432'
+WHERE id = 1;
+
+-- DELETE
+DELETE FROM pacientes
+WHERE id = 1;
+
+-- =========================================
+-- 📌 CRUD: FUNCIONÁRIOS
+-- =========================================
+
+-- CREATE
+INSERT INTO funcionarios (nome, cargo, data_contratacao)
+VALUES ('Ana Souza', 'Recepcionista', '2023-01-10');
+
+-- READ
+SELECT * FROM funcionarios;
+
+-- UPDATE
+UPDATE funcionarios
+SET cargo = 'Secretária'
+WHERE id = 1;
+
+-- DELETE
+DELETE FROM funcionarios
+WHERE id = 1;
+
+-- =========================================
+-- 📌 CRUD: CONSULTAS
+-- =========================================
+
+-- CREATE
+INSERT INTO consultas (paciente_id, medico_id, data_consulta, motivo)
+VALUES (1, 1, '2025-06-05 10:30:00', 'Consulta de rotina');
+
+-- READ (com nomes dos pacientes e médicos)
+SELECT c.id, p.nome AS paciente, m.nome AS medico, c.data_consulta, c.motivo
+FROM consultas c
+JOIN pacientes p ON c.paciente_id = p.id
+JOIN medicos m ON c.medico_id = m.id;
+
+-- UPDATE
+UPDATE consultas
+SET data_consulta = '2025-06-06 09:00:00'
+WHERE id = 1;
+
+-- DELETE
+DELETE FROM consultas
+WHERE id = 1;
