@@ -1,0 +1,26 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f4f6f8; color: #222; }
+nav { display: flex; gap: 1.2rem; align-items: center; padding: .8rem 1.5rem; background: #0b6e4f; }
+nav a { color: #fff; text-decoration: none; }
+nav .brand { font-weight: bold; margin-right: 1rem; }
+main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+.header { display: flex; justify-content: space-between; align-items: center; }
+.btn { background: #0b6e4f; color: #fff; padding: .5rem 1rem; border: 0; border-radius: 6px; text-decoration: none; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 6px; overflow: hidden; }
+th, td { padding: .6rem .8rem; text-align: left; border-bottom: 1px solid #e5e8eb; }
+th { background: #e9eef2; }
+.vazio { text-align: center; color: #888; }
+.acoes { display: flex; gap: .8rem; justify-content: flex-end; }
+.acoes form { margin: 0; }
+.link { background: none; border: 0; cursor: pointer; padding: 0; font: inherit; }
+.danger { color: #c0392b; }
+.form { display: grid; gap: 1rem; max-width: 450px; }
+.form label { display: grid; gap: .3rem; font-weight: 500; }
+.form input, .form select { padding: .5rem; border: 1px solid #ccd; border-radius: 6px; font: inherit; }
+.botoes { display: flex; gap: 1rem; align-items: center; }
+.flash { padding: .7rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+.flash.success { background: #d4edda; }
+.flash.error { background: #f8d7da; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+.card { background: #fff; padding: 1.2rem; border-radius: 8px; display: grid; text-align: center; }
+.card strong { font-size: 2rem; color: #0b6e4f; }

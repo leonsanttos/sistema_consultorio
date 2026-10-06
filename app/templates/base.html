@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Consultório{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav>
+    <a class="brand" href="{{ url_for('main.inicio') }}">Consultório</a>
+    <a href="{{ url_for('consultas.listar') }}">Consultas</a>
+    <a href="{{ url_for('pacientes.listar') }}">Pacientes</a>
+    <a href="{{ url_for('medicos.listar') }}">Médicos</a>
+    <a href="{{ url_for('funcionarios.listar') }}">Funcionários</a>
+  </nav>
+  <main>
+    {% for categoria, msg in get_flashed_messages(with_categories=true) %}
+      <div class="flash {{ categoria }}">{{ msg }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

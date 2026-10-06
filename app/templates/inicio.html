@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Painel</h1>
+<div class="cards">
+  {% for nome, total in totais.items() %}
+    <div class="card"><strong>{{ total }}</strong><span>{{ nome }}</span></div>
+  {% endfor %}
+</div>
+{% endblock %}

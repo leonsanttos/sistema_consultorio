@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<h1>{{ titulo }}</h1>
+<form method="post" class="form">
+  {% for c in campos %}
+    {% set valor = registro[c.name] if registro and registro[c.name] is not none else '' %}
+    <label>{{ c.label }}{% if c.required %} *{% endif %}
+      {% if c.type == 'select' %}
+        <select name="{{ c.name }}" {% if c.required %}required{% endif %}>
+          <option value="">Selecione...</option>
+          {% for v, rotulo in c.choices %}
+            <option value="{{ v }}" {% if valor|string == v|string %}selected{% endif %}>{{ rotulo }}</option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input type="{{ c.type }}" name="{{ c.name }}" value="{{ valor }}" {% if c.required %}required{% endif %}>
+      {% endif %}
+    </label>
+  {% endfor %}
+  <div class="botoes">
+    <button class="btn" type="submit">Salvar</button>
+    <a href="{{ url_for(endpoint ~ '.listar') }}">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="header">
+  <h1>{{ titulo }}</h1>
+  <a class="btn" href="{{ url_for(endpoint ~ '.novo') }}">+ Novo</a>
+</div>
+<table>
+  <thead>
+    <tr>
+      {% for _, rotulo in colunas %}<th>{{ rotulo }}</th>{% endfor %}
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in registros %}
+    <tr>
+      {% for chave, _ in colunas %}<td>{{ (r[chave] or '')|string|replace('T', ' ') }}</td>{% endfor %}
+      <td class="acoes">
+        <a href="{{ url_for(endpoint ~ '.editar', id_=r['id']) }}">Editar</a>
+        <form method="post" action="{{ url_for(endpoint ~ '.excluir', id_=r['id']) }}"
+              onsubmit="return confirm('Excluir este registro?')">
+          <button class="link danger">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="{{ colunas|length + 1 }}" class="vazio">Nenhum registro.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
